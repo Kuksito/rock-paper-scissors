@@ -38,10 +38,28 @@ html{
     justify-content: space-evenly;
 }
 
+.choice-btn{
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.rock, .paper, .scissors{
+    width: 180px;
+    height: 180px;
+}
+
 .display-result{
     margin: 40px 0;
     display: flex;
     justify-content: space-evenly;
+}
+
+.user-result, .computer-result{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
 }
 
 .reset-btn{
