@@ -7,4 +7,45 @@ html{
     box-sizing: border-box;
 }
 
-.
+.container{
+    /* width: 100%; */
+    margin: 100px 0;
+    padding: 0 40px;
+}
+
+.game-title{
+    text-transform: capitalize;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.score{
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.user-score, .computer-score, .tie-score{
+    display: flex;
+    gap: 5px;
+    font-size: 18px;
+}
+
+.choices{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.display-result{
+    margin: 40px 0;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.reset-btn{
+    position: absolute;
+    right: 0;
+    margin-right: 40px;
+}
