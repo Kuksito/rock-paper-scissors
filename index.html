@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>rock paper scissors game</title>
+        <link rel="stylesheet" href="styles.css">
+        <script defer src="script.js"></script>
+    </head>
+
+    <body>
+        <div class="container">
+            <h1 class="game-title">rock paper scissors game</h1>
+
+            <div class="score">
+                <div class="user-score">
+                    <h4 class="user-score-title">User:</h4>
+                    <span id="user-score-value">0</span>
+                </div>
+                <div class="computer-score">
+                    <h4 class="computer-score-title">Computer:</h4>
+                    <span id="computer-score-value">0</span>
+                </div>
+                <div class="tie-score">
+                    <h4 class="tie-score-title">Tie:</h4>
+                    <span id="tier-score-value">0</span>
+                </div>
+            </div>
+
+                <div class="choices">
+                    <button class="choice-btn" id="rock"><img src="rock.png" alt="rock" class="rock"></button>
+                    <button class="choice-btn" id="paper"><img src="paper.png" alt="paper" class="paper"></button>
+                    <button class="choice-btn" id="scissors"><img src="scissors.png" alt="scissors" class="scissors"></button>
+                </div>
+
+                <div class="display-result">
+                    <div class="user-result">
+                        <h3 class="user-choice-title">User choice:</h3>
+                        <p id="user-choice-value"></p>
+                    </div>
+
+                    <div class="computer-result">
+                        <h3 class="computer-choice-title">Computer choice:</h3>
+                        <p id="computer-choice-value"></p>
+                    </div>
+                </div>
+
+                <button class="reset-btn" id="reset-btn">Reset</button>
+        </div>
+
+    </body>
+</html>
