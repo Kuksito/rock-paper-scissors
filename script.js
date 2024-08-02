@@ -1,101 +1,116 @@
+const containerMessage = document.querySelector('.message')
 const userScore = document.getElementById('user-score-value')
 const computerScore = document.getElementById('computer-score-value')
-const tieScore = document.getElementById('tie-score-value')
-const rockBtn = document.getElementById('rock')
-const paperBtn = document.getElementById('paper')
-const scissorsBtn = document.getElementById('scissors')
+const drawScore = document.getElementById('draw-score-value')
 const userChoiceDisplay = document.getElementById('user-choice-value')
 const computerChoiceDisplay = document.getElementById('computer-choice-value')
 const resetBtn = document.getElementById('reset-btn')
+const selectionBtns = document.querySelectorAll('[data-selection]')
+
+const imgUser = document.createElement('img')
+const imgComputer = document.createElement('img')
+const winContainer = document.createElement('div')
+const winText = document.createElement('p')
+
 
 let computerResult
+let userScoreValue = 0;
+let computerScoreValue = 0;
+let drawScoreValue = 0;
+userScore.textContent = `${userScoreValue}`
+computerScore.textContent = `${computerScoreValue}`
+drawScore.textContent = `${drawScoreValue}`
+
+// Kyle helped with that
+selectionBtns.forEach(btn => {
+    btn.addEventListener('click', ()=>{
+        const selectionBtnName = btn.dataset.selection
+        displayUserChoice(selectionBtnName),
+        getComputerChoice()
+        checkForWinOrDraw(selectionBtnName)
+    })
+})
 
 //computer random choice
 function getComputerChoice(){
-    //make a timer so computer will choose after 1 sec
-    // const computerChoices = ['rock', 'paper', 'scissors']
-
     computerResult = Math.floor(Math.random() * 3)
-    console.log(computerResult);
     displayComputerChoice()
 }
 
-getComputerChoice()
-
 //display computer choice
 function displayComputerChoice(){
-    setTimeout(() => {
-        const img = document.createElement('img')
+    removeComputerChoice()
     if(computerResult === 0){
-        img.src = './imgs/rock.png'
-        img.classList.add('rock')
+        imgComputer.src = './imgs/rock.png'
     } else if (computerResult === 1){
-        img.src = './imgs/paper.png'
-        img.classList.add('paper')
+        imgComputer.src = './imgs/paper.png'
     } else {
-        img.src = './imgs/scissors.png'
-        img.classList.add('scissors')
+        imgComputer.src = './imgs/scissors.png'
     }
-    computerChoiceDisplay.append(img)
-    }, 1000);
+    imgComputer.classList.add('img')
+    computerChoiceDisplay.append(imgComputer)
 }
 
-//display user choice
-rockBtn.addEventListener('click', displayUserChoice)
-
-paperBtn.addEventListener('click', displayUserChoice)
-
-scissorsBtn.addEventListener('click', displayUserChoice)
-
-function displayUserChoice(e){
-    const img = document.createElement('img')
-    if(e.currentTarget === rockBtn){
-        img.src = './imgs/rock.png'
-        img.classList.add('rock')
-    } else if(e.currentTarget === paperBtn){
-        img.src = './imgs/paper.png'
-        img.classList.add('paper')
-    } else {
-        img.src ='./imgs/scissors.png'
-        img.classList.add('scissors')
-    }
-    userChoiceDisplay.append(img)
-    checkForUserWin()
-    checkForComputerWin()
-    checkForTie()
+function displayUserChoice(choice){
+    removeUserChoice()
+    if(choice){
+        imgUser.src = `./imgs/${choice}.png`
+        imgUser.classList.add('img')
+        userChoiceDisplay.append(imgUser)
+    }  
 }
 
+// remove user choice from container
+function removeUserChoice(){
+   return imgUser.remove()
+}
 
-// FIX - contains(img.src - not defined)!
-//check for win
-function checkForUserWin(){
-    if((userChoiceDisplay.contains(img.src = 'paper.png')) && (computerChoiceDisplay.contains(img.src = 'rock.png'))){
-        return userScore++
-    } else if ((userChoiceDisplay.contains(img.src = 'rock.png')) && (computerChoiceDisplay.contains(img.src = 'scissors.png'))){
-        return userScore++
-    } else if((userChoiceDisplay.contains(img.src = 'scissors.png')) && (computerChoiceDisplay.contains(img.src = 'paper.png'))){
-        return userScore++
+// remove computer choice from container
+function removeComputerChoice(){
+    return imgComputer.remove()
+}
+
+function checkForWinOrDraw(btn){
+    const userBtn = btn
+    // check for user win
+    if(userBtn === 'rock' && computerResult === 2 || userBtn === 'paper' && computerResult === 0 || userBtn === 'scissors' && computerResult === 1){
+        userScore.textContent = ''
+        userScoreValue += 1
+        userScore.append(userScoreValue)
+        winOrDrawMessage('You win!')
+        } 
+    // check for computer win
+    if(userBtn === 'rock' && computerResult === 1 || userBtn === 'paper' && computerResult === 2 || userBtn === 'scissors' && computerResult === 0){
+        computerScore.textContent = ''
+        computerScoreValue += 1
+        computerScore.append(computerScoreValue)
+        winOrDrawMessage('Computer win!')
+    } 
+    // check for a draw
+    if(userBtn === 'rock' && computerResult === 0 || userBtn === 'paper' && computerResult === 1 || userBtn === 'scissors' && computerResult === 2){
+        drawScore.textContent = ''
+        drawScoreValue += 1
+        drawScore.append(drawScoreValue)
+        winOrDrawMessage(`It's a draw!`)
     } 
 }
 
-//check for lose
-function checkForComputerWin(){
-    if((userChoiceDisplay.contains(img.src = 'rock.png')) && (computerChoiceDisplay.contains(img.src = 'paper.png'))){
-        return computerScore++
-    } else if ((userChoiceDisplay.contains(img.src = 'scissors.png')) && (computerChoiceDisplay.contains(img.src = 'rock.png'))){
-        return computerScore++
-    } else if((userChoiceDisplay.contains(img.src = 'paper.png')) && (computerChoiceDisplay.contains(img.src = 'scissors.png'))){
-        return computerScore++
-    } 
+function winOrDrawMessage(text){
+    removeMessage()
+    winContainer.classList.add('win')
+    winText.textContent = `${text}`
+    winContainer.append(winText)
+    containerMessage.append(winContainer)
+    document.body.style.background ='rgb(71 63 63 / 74%)'
 }
 
-//check for tie
-function checkForTie(){
-    if((userChoiceDisplay.contains(img.src = 'paper.png')) && (computerChoiceDisplay.contains(img.src = 'paper.png'))){
-        return tieScore++
-    } else if ((userChoiceDisplay.contains(img.src = 'rock.png')) && (computerChoiceDisplay.contains(img.src = 'rock.png'))){
-        return tieScore++
-    } else if((userChoiceDisplay.contains(img.src = 'scissors.png')) && (computerChoiceDisplay.contains(img.src = 'scissors.png'))){
-        return tieScore++
-    } 
+function removeMessage(){
+    setTimeout(() => {
+    winContainer.remove()
+    document.body.style.background ='none'
+    }, 1500);
 }
+
+resetBtn.addEventListener('click', () => {
+    window.location.reload(true)
+})
