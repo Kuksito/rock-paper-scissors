@@ -5,31 +5,43 @@
 
 html{
     box-sizing: border-box;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(#d6f3ea, #b180c5);
+}
+
+body{
+    position: absolute;
+    width: 100%;
+    height: 100%;
 }
 
 .container{
-    /* width: 100%; */
-    margin: 100px 0;
+    width: 800px;
+    margin: 120px auto 0;
     padding: 0 40px;
+    position: relative;
 }
 
 .game-title{
     text-transform: capitalize;
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
+    font-size: 48px;
 }
 
 .score{
     display: flex;
     justify-content: flex-end;
     gap: 15px;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
 }
 
-.user-score, .computer-score, .tie-score{
+.user-score, .computer-score, .draw-score{
     display: flex;
     gap: 5px;
-    font-size: 18px;
+    font-size: 25px;
 }
 
 .choices{
@@ -44,7 +56,7 @@ html{
     cursor: pointer;
 }
 
-.rock, .paper, .scissors{
+.img{
     width: 180px;
     height: 180px;
 }
@@ -60,10 +72,50 @@ html{
     flex-direction: column;
     align-items: center;
     gap: 20px;
+    font-size: 18px;
+}
+
+#user-choice-value, #computer-choice-value {
+    display: flex;
+    flex-direction: column;
+   justify-content: center;
 }
 
 .reset-btn{
     position: absolute;
     right: 0;
     margin-right: 40px;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    background: #d5eee9;
+    color: #8300c3;
+    border: 1px solid #9d3bcd;
+    cursor: pointer;
+    transition: .3s ease-in-out
+}
+
+.reset-btn:hover{
+    background: #9d3bcd;
+    color: #d5eee9;
+}
+
+.win{
+    display: flex;
+    width: 500px;
+    margin: 0 auto;
+    height: 350px;
+    border-radius: 10px;
+    position: absolute;
+    left: 0;
+    top: 250px;
+    right: 0;
+    font-size: 68px;
+    font-weight: bold;
+    background: #f09bff;
+    color: #f0fffc;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
 }
