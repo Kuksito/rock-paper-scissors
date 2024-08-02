@@ -96,12 +96,14 @@ function checkForWinOrDraw(btn){
 }
 
 function winOrDrawMessage(text){
-    removeMessage()
+    setTimeout(() => {
     winContainer.classList.add('win')
     winText.textContent = `${text}`
     winContainer.append(winText)
     containerMessage.append(winContainer)
     document.body.style.background ='rgb(71 63 63 / 74%)'
+    }, 500);
+    removeMessage()
 }
 
 function removeMessage(){
