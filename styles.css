@@ -38,10 +38,17 @@ body{
     margin-bottom: 50px;
 }
 
-.user-score, .computer-score, .draw-score{
+.user-score, .computer-score, .draw-score, .round-count{
     display: flex;
     gap: 5px;
     font-size: 25px;
+}
+
+.round-count{
+    color: #aa35df;
+    position: absolute;
+    left: 128px;
+    font-weight: bold;
 }
 
 .choices{
