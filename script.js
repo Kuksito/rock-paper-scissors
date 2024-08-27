@@ -1,4 +1,6 @@
 const containerMessage = document.querySelector('.message');
+const scoreContainer = document.querySelector('.score');
+const userScoreContainer = document.querySelector('.user-score');
 const userScore = document.getElementById('user-score-value');
 const computerScore = document.getElementById('computer-score-value');
 const drawScore = document.getElementById('draw-score-value');
@@ -16,6 +18,11 @@ const rulesContainer = document.createElement('div');
 const rulesText = document.createElement('p');
 const btnStart = document.createElement('button');
 
+const round = document.createElement('p');
+round.classList.add('round-count');
+round.textContent = 'Round: 0';
+scoreContainer.insertBefore(round, userScoreContainer);
+
 let computerResult;
 let userScoreValue = 0;
 let computerScoreValue = 0;
@@ -28,7 +35,7 @@ drawScore.textContent = `${drawScoreValue}`;
 function startGame(){
     rulesContainer.classList.add('rules');
     rulesText.classList.add('rules-text');
-    btnStart.classList.add('btn-start')
+    btnStart.classList.add('btn-start');
     rulesText.textContent = "After you've played 5 rounds the game will start over.";
     btnStart.textContent = 'Start';
     btnStart.addEventListener('click', ()=> {
@@ -48,6 +55,7 @@ selectionBtns.forEach(btn => {
     btn.addEventListener('click', ()=>{
         const selectionBtnName = btn.dataset.selection;
         btnClicked++;
+        round.textContent = `Round: ${btnClicked}`;
         console.log(btnClicked);
         displayUserChoice(selectionBtnName);
         getComputerChoice();
