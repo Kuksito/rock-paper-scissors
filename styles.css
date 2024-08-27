@@ -101,7 +101,7 @@ body{
     color: #d5eee9;
 }
 
-.win{
+.win, .rules{
     display: flex;
     width: 500px;
     margin: 0 auto;
@@ -111,11 +111,46 @@ body{
     left: 0;
     top: 250px;
     right: 0;
-    font-size: 68px;
     font-weight: bold;
-    background: #f09bff;
-    color: #f0fffc;
     justify-content: center;
     align-items: center;
     z-index: 10;
+}
+
+.win{
+    background: #f09bff;
+    color: #f0fffc;
+    font-size: 68px;
+}
+
+.rules{
+    flex-direction: column;
+    gap: 10px;
+    background: #d6f3ea;
+    color: #222726;
+}
+
+.rules-text{
+    font-size: 38px;
+    max-width: 400px;
+    text-align: center;
+}
+
+.btn-start{
+    font-size: 24px;
+    font-weight: bold;
+    background: #627b73;
+    color: aliceblue;
+    width: 90px;
+    padding: 5px;
+    border: none;
+    box-shadow: 0px 2px 2px #000;
+    border-radius: 5px;
+    position: relative;
+    bottom: -30px;
+    cursor: pointer;
+}
+
+.btn-start:hover{
+    background: #1d5945;
 }
