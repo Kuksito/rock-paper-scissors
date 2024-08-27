@@ -27,6 +27,8 @@ drawScore.textContent = `${drawScoreValue}`;
 
 function startGame(){
     rulesContainer.classList.add('rules');
+    rulesText.classList.add('rules-text');
+    btnStart.classList.add('btn-start')
     rulesText.textContent = "After you've played 5 rounds the game will start over.";
     btnStart.textContent = 'Start';
     btnStart.addEventListener('click', ()=> {
