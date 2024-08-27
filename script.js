@@ -12,22 +12,47 @@ const imgComputer = document.createElement('img');
 const winContainer = document.createElement('div');
 const winText = document.createElement('p');
 
+const rulesContainer = document.createElement('div');
+const rulesText = document.createElement('p');
+const btnStart = document.createElement('button');
 
 let computerResult;
 let userScoreValue = 0;
 let computerScoreValue = 0;
 let drawScoreValue = 0;
+let btnClicked = 0;
 userScore.textContent = `${userScoreValue}`;
 computerScore.textContent = `${computerScoreValue}`;
 drawScore.textContent = `${drawScoreValue}`;
+
+function startGame(){
+    rulesContainer.classList.add('rules');
+    rulesText.textContent = "After you've played 5 rounds the game will start over.";
+    btnStart.textContent = 'Start';
+    btnStart.addEventListener('click', ()=> {
+        rulesContainer.remove();
+        document.body.style.background ='none';
+    })
+    rulesContainer.append(rulesText);
+    rulesContainer.append(btnStart);
+    containerMessage.append(rulesContainer);
+    document.body.style.background ='rgb(71 63 63 / 74%)';
+}
+
+startGame();
 
 // Kyle helped with that
 selectionBtns.forEach(btn => {
     btn.addEventListener('click', ()=>{
         const selectionBtnName = btn.dataset.selection;
+        btnClicked++;
+        console.log(btnClicked);
         displayUserChoice(selectionBtnName);
         getComputerChoice();
         checkForWinOrDraw(selectionBtnName);
+        if(btnClicked === 5) {
+            playRound()
+        }
     })
 })
 
@@ -68,27 +93,41 @@ function removeComputerChoice(){
 
 function checkForWinOrDraw(btn){
     const userBtn = btn;
-    
-    if(userBtn === 'rock' && computerResult === 2 || userBtn === 'paper' && computerResult === 0 || userBtn === 'scissors' && computerResult === 1){
-        userScore.textContent = '';
-        userScoreValue += 1;
-        userScore.append(userScoreValue);
-        winOrDrawMessage('You win!');
-        } 
-  
-    if(userBtn === 'rock' && computerResult === 1 || userBtn === 'paper' && computerResult === 2 || userBtn === 'scissors' && computerResult === 0){
-        computerScore.textContent = '';
-        computerScoreValue += 1;
-        computerScore.append(computerScoreValue);
-        winOrDrawMessage('Computer win!');
-    } 
 
-    if(userBtn === 'rock' && computerResult === 0 || userBtn === 'paper' && computerResult === 1 || userBtn === 'scissors' && computerResult === 2){
-        drawScore.textContent = '';
-        drawScoreValue += 1;
-        drawScore.append(drawScoreValue);
+        if(userBtn === 'rock' && computerResult === 2 || userBtn === 'paper' && computerResult === 0 || userBtn === 'scissors' && computerResult === 1){
+            userScore.textContent = '';
+            userScoreValue += 1;
+            userScore.append(userScoreValue);
+        }
+
+        if(userBtn === 'rock' && computerResult === 1 || userBtn === 'paper' && computerResult === 2 || userBtn === 'scissors' && computerResult === 0){
+            computerScore.textContent = '';
+            computerScoreValue += 1;
+            computerScore.append(computerScoreValue);
+        } 
+
+        if(userBtn === 'rock' && computerResult === 0 || userBtn === 'paper' && computerResult === 1 || userBtn === 'scissors' && computerResult === 2){
+            drawScore.textContent = '';
+            drawScoreValue += 1;
+            drawScore.append(drawScoreValue);
+        } 
+
+}
+
+function playRound(){
+    if(userScoreValue === 4 || userScoreValue === 3 || userScoreValue === 2 && drawScoreValue === 2){
+        winOrDrawMessage('You win!');
+    }
+    if(computerScoreValue === 4 || computerScoreValue === 3 || computerScoreValue === 2 && drawScoreValue === 2){
+        winOrDrawMessage('Computer win!');
+    }
+    if(drawScoreValue === 4 || drawScoreValue === 3 || computerScoreValue === 2 && userScoreValue === 2){
         winOrDrawMessage(`It's a draw!`);
-    } 
+    }
+
+    setTimeout(() => {
+        window.location.reload(true);
+        }, 1500);
 }
 
 function winOrDrawMessage(text){
